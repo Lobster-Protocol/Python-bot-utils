@@ -3,7 +3,7 @@
 from setuptools import find_packages, setup
 
 setup(
-    name="python-bot-utils",
+    name="python_bot_utils",
     version="0.1.0",
     description="Python-bot-utils-Lobster package",
     author="Elli610",
