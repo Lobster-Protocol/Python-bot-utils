@@ -13,6 +13,8 @@ setup(
     python_requires=">=3.8",
     install_requires=[
         "pytest>=8.3.5",
+        "web3==7.11.1",
+        "eth-abi==5.2.0",
     ],
     extras_require={
         "dev": [],
