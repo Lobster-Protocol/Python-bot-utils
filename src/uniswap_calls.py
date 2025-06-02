@@ -1,6 +1,6 @@
 """Uniswap V3 function encoder."""
 
-# todo: add: "exactOutputSingle","exactInput""exactOutput" function encoder tests
+# todo: add: "exactOutputSingle","exactInput" and "exactOutput" function encoders
 
 from typing import cast
 
