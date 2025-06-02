@@ -1,0 +1,45 @@
+"""Tests for Uniswap V3 exactInputSingle function encoder."""
+
+from uniswap_calls import encode_exactInputSingle
+
+
+def test_encode_exactInputSingle() -> None:
+    """Function: exactInputSingle(tuple params).
+
+    MethodID: 0x414bf389
+    [0]:  000000000000000000000000c02aaa39b223fe8d0a0e5c4f27ead9083c756cc2
+    [1]:  0000000000000000000000006781a0f84c7e9e846dcb84a9a5bd49333067b104
+    [2]:  0000000000000000000000000000000000000000000000000000000000000bb8
+    [3]:  000000000000000000000000acee3cb3a5df2775445c8ae020e187f6c9dd2774
+    [4]:  0000000000000000000000000000000000000000000000000000000060af98bf
+    [5]:  0000000000000000000000000000000000000000000000000004f94ae6af8000
+    [6]:  000000000000000000000000000000000000000000000001f62a6a248491df56
+    [7]:  0000000000000000000000000000000000000000000000000000000000000000
+    """
+    token_in: str = "0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2"
+    token_out: str = "0x6781a0f84c7e9e846dcb84a9a5bd49333067b104"
+    fee: int = 3000
+    recipient: str = "0xacee3cb3a5df2775445c8ae020e187f6c9dd2774"
+    deadline: int = 1622120639
+    amount_in: int = 1400000000000000
+    amount_out_minimum: int = 36184850861137190742
+    sqrt_price_limit_x96: int = 0
+
+    encoded_call: str = encode_exactInputSingle(
+        token_in=token_in,
+        token_out=token_out,
+        fee=fee,
+        recipient=recipient,
+        deadline=deadline,
+        amount_in=amount_in,
+        amount_out_minimum=amount_out_minimum,
+        sqrt_price_limit_x96=sqrt_price_limit_x96,
+    )
+    assert isinstance(encoded_call, str)
+    # Ensure the encoded call is the same as the expected value
+    expected_call: str = (
+        "0x414bf389000000000000000000000000c02aaa39b223fe8d0a0e5c4f27ead9083c756cc20000000000000000000000006781a0f84c7e9e846dcb84a9a5bd49333067b1040000000000000000000000000000000000000000000000000000000000000bb8000000000000000000000000acee3cb3a5df2775445c8ae020e187f6c9dd27740000000000000000000000000000000000000000000000000000000060af98bf0000000000000000000000000000000000000000000000000004f94ae6af8000000000000000000000000000000000000000000000000001f62a6a248491df560000000000000000000000000000000000000000000000000000000000000000"  # noqa
+    )
+    assert (
+        encoded_call == expected_call
+    ), f"Expected {expected_call}, got {encoded_call}"
