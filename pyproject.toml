@@ -30,7 +30,7 @@ python_functions = "test_*"
 python_classes = "Test*"
 
 [tool.flake8]
-max-line-length = 88
+max-line-length = 120
 extend-ignore = [
     # Ignore all docstring errors
     "D100", "D101", "D102", "D103", "D104", "D105", "D106", "D107"
