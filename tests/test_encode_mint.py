@@ -1,10 +1,6 @@
 """Tests for Uniswap V3 mint function encoder."""
 
-import warnings
-
 from uniswap_calls import encode_mint
-
-warnings.filterwarnings("ignore", category=DeprecationWarning, module="websockets")
 
 
 def test_encode_mint() -> None:

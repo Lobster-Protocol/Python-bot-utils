@@ -81,3 +81,31 @@ def encode_mint(
             abi_or_signature=mint_signature, function_name="mint", args=[mint_params]
         ),
     )
+
+
+def encode_burn(token_id: int) -> str:
+    """Encode a call to the Uniswap V3 NonfungiblePositionManager burn function.
+
+    Burns a token ID, which deletes it from the NFT contract. The token must
+    have 0 liquidity and all tokens must be collected first.
+
+    Args:
+        token_id: The ID of the token that is being burned
+
+    Returns:
+        str: Encoded transaction data with 0x prefix
+
+    Example:
+        >>> encode_burn(token_id=12345)
+        '0x42966c68...'
+    """
+    # Uniswap V3 burn function signature
+    burn_signature = "burn(uint256)"
+
+    # Use the encode_call function to encode the transaction
+    return cast(
+        str,
+        encode_call(
+            abi_or_signature=burn_signature, function_name="burn", args=[token_id]
+        ),
+    )
