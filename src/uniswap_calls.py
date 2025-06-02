@@ -109,3 +109,121 @@ def encode_burn(token_id: int) -> str:
             abi_or_signature=burn_signature, function_name="burn", args=[token_id]
         ),
     )
+
+
+def encode_increaseLiquidity(
+    token_id: int,
+    amount0_desired: int,
+    amount1_desired: int,
+    amount0_min: int,
+    amount1_min: int,
+    deadline: int,
+) -> str:
+    """Encode a call to the Uniswap V3 NonfungiblePositionManager increaseLiquidity function.
+
+    Increases the amount of liquidity in a position, with tokens paid by the msg.sender.
+    The position must already exist and have some liquidity.
+
+    Args:
+        token_id: The ID of the token for which liquidity is being increased
+        amount0_desired: The desired amount of token0 to be spent
+        amount1_desired: The desired amount of token1 to be spent
+        amount0_min: The minimum amount of token0 to spend (slippage protection)
+        amount1_min: The minimum amount of token1 to spend (slippage protection)
+        deadline: The time by which the transaction must be included
+
+    Returns:
+        str: Encoded transaction data with 0x prefix
+
+    Example:
+        >>> encode_increaseLiquidity(
+        ...     token_id=12345,
+        ...     amount0_desired=1000000000000000000,    # 1 token with 18 decimals
+        ...     amount1_desired=1000000000000000000,    # 1 token with 18 decimals
+        ...     amount0_min=950000000000000000,         # Min token0 (5% slippage protection)
+        ...     amount1_min=950000000000000000,         # Min token1 (5% slippage protection)
+        ...     deadline=1640995200                     # Unix timestamp
+        ... )
+        '0x219f5d17...'
+    """
+    # Uniswap V3 increaseLiquidity function signature
+    increase_liquidity_signature = (
+        "increaseLiquidity(" "(uint256,uint256,uint256,uint256,uint256,uint256)" ")"
+    )
+
+    # Pack all parameters into a tuple (struct)
+    increase_liquidity_params = (
+        token_id,
+        amount0_desired,
+        amount1_desired,
+        amount0_min,
+        amount1_min,
+        deadline,
+    )
+
+    # Use the encode_call function to encode the transaction
+    return cast(
+        str,
+        encode_call(
+            abi_or_signature=increase_liquidity_signature,
+            function_name="increaseLiquidity",
+            args=[increase_liquidity_params],
+        ),
+    )
+
+
+def encode_decreaseLiquidity(
+    token_id: int,
+    liquidity: int,
+    amount0_min: int,
+    amount1_min: int,
+    deadline: int,
+) -> str:
+    """Encode a call to the Uniswap V3 NonfungiblePositionManager decreaseLiquidity function.
+
+    Decreases the amount of liquidity in a position and accounts it to the position.
+    The liquidity is burned and the underlying tokens are accounted to the position's tokens owed.
+
+    Args:
+        token_id: The ID of the token for which liquidity is being decreased
+        liquidity: The amount by which liquidity will be decreased
+        amount0_min: The minimum amount of token0 that should be accounted for the burned liquidity
+        amount1_min: The minimum amount of token1 that should be accounted for the burned liquidity
+        deadline: The time by which the transaction must be included
+
+    Returns:
+        str: Encoded transaction data with 0x prefix
+
+    Example:
+        >>> encode_decreaseLiquidity(
+        ...     token_id=12345,
+        ...     liquidity=1000000000000000000,        # Amount of liquidity to decrease
+        ...     amount0_min=950000000000000000,       # Min token0 (5% slippage protection)
+        ...     amount1_min=950000000000000000,       # Min token1 (5% slippage protection)
+        ...     deadline=1640995200                   # Unix timestamp
+        ... )
+        '0x0c49ccbe...'
+    """
+    # Uniswap V3 decreaseLiquidity function signature
+    decrease_liquidity_signature = (
+        "decreaseLiquidity(" "(uint256,uint128,uint256,uint256,uint256)" ")"
+    )
+
+    # Pack all parameters into a tuple (struct)
+    decrease_liquidity_params = (
+        token_id,
+        liquidity,
+        amount0_min,
+        amount1_min,
+        deadline,
+    )
+
+    # Use the encode_call function to encode the transaction
+    return cast(
+        str,
+        encode_call(
+            abi_or_signature=decrease_liquidity_signature,
+            function_name="decreaseLiquidity",
+            args=[decrease_liquidity_params],
+        ),
+    )

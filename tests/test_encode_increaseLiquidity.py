@@ -1,0 +1,39 @@
+"""Tests for Uniswap V3 increaseLiquidity function encoder."""
+
+from uniswap_calls import encode_increaseLiquidity
+
+
+def test_encode_increaseLiquidity() -> None:
+    """Function: increaseLiquidity(tuple params).
+
+    MethodID: 0x219f5d17
+    [0]:  000000000000000000000000000000000000000000000000000000000002a673
+    [1]:  00000000000000000000000000000000000000000000000058ec3db656aedc2d
+    [2]:  00000000000000000000000000000000000000000000b91285f75b362b369ff6
+    [3]:  0000000000000000000000000000000000000000000000005455ab9960e38780
+    [4]:  00000000000000000000000000000000000000000000b0c180390a110e74e545
+    [5]:  0000000000000000000000000000000000000000000000000000000068395fe7
+    """
+    token_id: int = 173683
+    amount0_desired: int = 6407564223189015597
+    amount1_desired: int = 873979494008825639772150
+    amount0_min: int = 6076951947450222464
+    amount1_min: int = 834705962018462401619269
+    deadline: int = 1748590567
+
+    encoded_call: str = encode_increaseLiquidity(
+        token_id=token_id,
+        amount0_desired=amount0_desired,
+        amount1_desired=amount1_desired,
+        amount0_min=amount0_min,
+        amount1_min=amount1_min,
+        deadline=deadline,
+    )
+    assert isinstance(encoded_call, str)
+    # Ensure the encoded call is the same as the expected value
+    expected_call: str = (
+        "0x219f5d17000000000000000000000000000000000000000000000000000000000002a67300000000000000000000000000000000000000000000000058ec3db656aedc2d00000000000000000000000000000000000000000000b91285f75b362b369ff60000000000000000000000000000000000000000000000005455ab9960e3878000000000000000000000000000000000000000000000b0c180390a110e74e5450000000000000000000000000000000000000000000000000000000068395fe7"  # noqa
+    )
+    assert (
+        encoded_call == expected_call
+    ), f"Expected {expected_call}, got {encoded_call}"
