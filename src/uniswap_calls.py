@@ -20,7 +20,7 @@ def encode_mint(
     recipient: str,
     deadline: int,
 ) -> str:
-    """Encode a call to the Uniswap V3 NonfungiblePositionManager mint function.
+    """Encode a call to the Uniswap V3 NonFungiblePositionManager mint function.
 
     Args:
         token0: Address of the first token in the pool
@@ -86,7 +86,7 @@ def encode_mint(
 
 
 def encode_burn(token_id: int) -> str:
-    """Encode a call to the Uniswap V3 NonfungiblePositionManager burn function.
+    """Encode a call to the Uniswap V3 NonFungiblePositionManager burn function.
 
     Burns a token ID, which deletes it from the NFT contract. The token must
     have 0 liquidity and all tokens must be collected first.
@@ -121,7 +121,7 @@ def encode_increaseLiquidity(
     amount1_min: int,
     deadline: int,
 ) -> str:
-    """Encode a call to the Uniswap V3 NonfungiblePositionManager increaseLiquidity function.
+    """Encode a call to the Uniswap V3 NonFungiblePositionManager increaseLiquidity function.
 
     Increases the amount of liquidity in a position, with tokens paid by the msg.sender.
     The position must already exist and have some liquidity.
@@ -181,7 +181,7 @@ def encode_decreaseLiquidity(
     amount1_min: int,
     deadline: int,
 ) -> str:
-    """Encode a call to the Uniswap V3 NonfungiblePositionManager decreaseLiquidity function.
+    """Encode a call to the Uniswap V3 NonFungiblePositionManager decreaseLiquidity function.
 
     Decreases the amount of liquidity in a position and accounts it to the position.
     The liquidity is burned and the underlying tokens are accounted to the position's tokens owed.
@@ -308,7 +308,7 @@ def encode_collect(
     amount0_max: int,
     amount1_max: int,
 ) -> str:
-    """Encode a call to the Uniswap V3 NonfungiblePositionManager collect function.
+    """Encode a call to the Uniswap V3 NonFungiblePositionManager collect function.
 
     Collects up to a maximum amount of fees owed to a specific position to the recipient.
     This function collects accumulated fees from a liquidity position.
