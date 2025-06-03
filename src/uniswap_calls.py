@@ -300,3 +300,54 @@ def encode_exactInputSingle(
             args=[exact_input_single_params],
         ),
     )
+
+
+def encode_collect(
+    token_id: int,
+    recipient: str,
+    amount0_max: int,
+    amount1_max: int,
+) -> str:
+    """Encode a call to the Uniswap V3 NonfungiblePositionManager collect function.
+
+    Collects up to a maximum amount of fees owed to a specific position to the recipient.
+    This function collects accumulated fees from a liquidity position.
+
+    Args:
+        token_id: The ID of the NFT for which tokens are being collected
+        recipient: The account that should receive the tokens
+        amount0_max: The maximum amount of token0 to collect
+        amount1_max: The maximum amount of token1 to collect
+
+    Returns:
+        str: Encoded transaction data with 0x prefix
+
+    Example:
+        >>> encode_collect(
+        ...     token_id=12345,
+        ...     recipient="0x742d35Cc6634C0532925a3b8D03c8C0B6B1A2b68",
+        ...     amount0_max=340282366920938463463374607431768211455,  # Max uint128
+        ...     amount1_max=340282366920938463463374607431768211455   # Max uint128
+        ... )
+        '0xfc6f7865...'
+    """
+    # Uniswap V3 collect function signature
+    collect_signature = "collect(" "(uint256,address,uint128,uint128)" ")"
+
+    # Pack all parameters into a tuple (struct)
+    collect_params = (
+        token_id,
+        recipient,
+        amount0_max,
+        amount1_max,
+    )
+
+    # Use the encode_call function to encode the transaction
+    return cast(
+        str,
+        encode_call(
+            abi_or_signature=collect_signature,
+            function_name="collect",
+            args=[collect_params],
+        ),
+    )
