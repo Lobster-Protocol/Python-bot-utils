@@ -1,4 +1,7 @@
 from call_encoder import encode_call
+from uniswap_calls.pool import encode_burn as pool_encode_burn
+from uniswap_calls.pool import encode_collect as pool_encode_collect
+from uniswap_calls.pool import encode_mint as pool_encode_mint
 from uniswap_calls.position_manager import (
     encode_burn,
     encode_collect,
@@ -12,11 +15,17 @@ from .uniswap_calls.router import encode_exactInputSingle
 # Define what gets imported with "from package import *"
 __all__ = [
     "encode_call",
+    # Position manager functions
     "encode_mint",
     "encode_burn",
     "encode_collect",
     "encode_increaseLiquidity",
     "encode_decreaseLiquidity",
+    # Router functions
     "encode_exactInputSingle",
+    # Pool functions (with prefixed names to avoid conflicts)
+    "pool_encode_mint",
+    "pool_encode_burn",
+    "pool_encode_collect",
 ]
 __version__ = "0.1.2"
