@@ -1,6 +1,6 @@
 """Tests for Uniswap V3 mint function encoder."""
 
-from uniswap_calls import encode_mint
+from uniswap_calls.position_manager import encode_mint
 
 
 def test_encode_mint() -> None:

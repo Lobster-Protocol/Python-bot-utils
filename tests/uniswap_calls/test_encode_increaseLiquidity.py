@@ -1,6 +1,6 @@
 """Tests for Uniswap V3 increaseLiquidity function encoder."""
 
-from uniswap_calls import encode_increaseLiquidity
+from uniswap_calls.position_manager import encode_increaseLiquidity
 
 
 def test_encode_increaseLiquidity() -> None:

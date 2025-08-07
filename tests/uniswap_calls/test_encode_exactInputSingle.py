@@ -1,6 +1,6 @@
 """Tests for Uniswap V3 exactInputSingle function encoder."""
 
-from uniswap_calls import encode_exactInputSingle
+from uniswap_calls.router import encode_exactInputSingle
 
 
 def test_encode_exactInputSingle() -> None:

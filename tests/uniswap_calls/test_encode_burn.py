@@ -1,6 +1,6 @@
 """Tests for Uniswap V3 mint function encoder."""
 
-from uniswap_calls import encode_burn
+from uniswap_calls.position_manager import encode_burn
 
 
 def test_encode_burn() -> None:

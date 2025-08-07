@@ -1,12 +1,13 @@
-from .call_encoder import encode_call
-from .uniswap_calls import (
+from call_encoder import encode_call
+from uniswap_calls.position_manager import (
     encode_burn,
     encode_collect,
     encode_decreaseLiquidity,
-    encode_exactInputSingle,
     encode_increaseLiquidity,
     encode_mint,
 )
+
+from .uniswap_calls.router import encode_exactInputSingle
 
 # Define what gets imported with "from package import *"
 __all__ = [
@@ -18,4 +19,4 @@ __all__ = [
     "encode_decreaseLiquidity",
     "encode_exactInputSingle",
 ]
-__version__ = "0.1.1"
+__version__ = "0.1.2"

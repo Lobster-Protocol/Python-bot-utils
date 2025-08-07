@@ -84,7 +84,7 @@ def encode_call(
         args: List of arguments to pass to the function
 
     Returns:
-        str: Encoded transaction data with 0x prefix
+        str: Encoded call data with 0x prefix
 
     Examples:
         >>> # Using function signature

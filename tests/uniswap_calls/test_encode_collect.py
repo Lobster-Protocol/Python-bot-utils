@@ -1,6 +1,6 @@
 """Tests for Uniswap V3 collect function encoder."""
 
-from uniswap_calls import encode_collect
+from uniswap_calls.position_manager import encode_collect
 
 
 def test_encode_collect() -> None:
