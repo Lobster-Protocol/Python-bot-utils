@@ -1,6 +1,6 @@
 from typing import cast
 
-from call_encoder import encode_call
+from ..call_encoder import encode_call
 
 # todo: add: "exactOutputSingle","exactInput" and "exactOutput" function encoders
 
