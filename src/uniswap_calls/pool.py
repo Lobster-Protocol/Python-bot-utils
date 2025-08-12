@@ -3,7 +3,7 @@
 # todo: test
 from typing import cast
 
-from call_encoder import encode_call
+from .call_encoder import encode_call
 
 
 def encode_mint(
