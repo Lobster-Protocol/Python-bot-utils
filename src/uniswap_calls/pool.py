@@ -11,6 +11,7 @@ def encode_mint(
     tick_lower: int,
     tick_upper: int,
     liquidity: int,
+    data: str,
 ) -> str:
     """Encode a call to the Uniswap V3 pool mint function, avoiding the position manager.
 
@@ -34,6 +35,19 @@ def encode_mint(
         ...     amount=1000000000000000000,  # liquidity amount
         ...     data="0x...." # Example callback data
     """
+    # Uniswap V3 mint function signature
+    mint_signature = "mint(address,int24,int24,uint128,bytes)"
+
+    # Use the encode_call function to encode the transaction
+    return cast(
+        str,
+        encode_call(
+            abi_or_signature=mint_signature,
+            function_name="mint",
+            args=[owner, tick_lower, tick_upper, liquidity, data],
+        ),
+    )
+
     print(owner, tick_lower, tick_upper, liquidity)
     raise NotImplementedError("The mint function encoder is not implemented yet. ")
 
@@ -101,16 +115,7 @@ def encode_collect(
         '0xfc6f7865...'
     """
     # Uniswap V3 collect function signature
-    collect_signature = "collect(" "(address,int24,int24,uint128,uint128)" ")"
-
-    # Pack all parameters into a tuple (struct)
-    collect_params = (
-        recipient,
-        tickLower,
-        tickUpper,
-        amount0Requested,
-        amount1Requested,
-    )
+    collect_signature = "collect(address,int24,int24,uint128,uint128)"
 
     # Use the encode_call function to encode the transaction
     return cast(
@@ -118,6 +123,6 @@ def encode_collect(
         encode_call(
             abi_or_signature=collect_signature,
             function_name="collect",
-            args=[collect_params],
+            args=[recipient, tickLower, tickUpper, amount0Requested, amount1Requested],
         ),
     )
